@@ -1,0 +1,32 @@
+<ion-content>
+  <br>
+  <ion-grid fixed>
+    <ion-row class="ion-padding-top">
+      <ion-col size="12">
+        <h2 class="ion-padding-top">
+          Login
+        </h2>
+        <br>
+        <br>
+        <br>
+        <ion-item>
+          <ion-label position="floating">Username</ion-label>
+          <ion-input type="text" value="" [(ngModel)]="formData.username"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="password" value="" [(ngModel)]="formData.password"></ion-input>
+        </ion-item>
+        <br>
+        <ion-button expand="block" fill="solid" (click)="login()">Signin</ion-button>
+        <br>
+        <div class="ion-text-center">
+          <p>New here? <span routerLink="/register">Sign up</span></p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

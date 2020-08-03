@@ -1,0 +1,75 @@
+<ion-content>
+  <div class="weather-body">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="12">
+          <br>
+          <br>
+          <br>
+          <h2>Find Weather</h2>
+          <ion-item>
+            <ion-label>Select City</ion-label>
+            <ion-select [(ngModel)]="cityID" (ionChange)="getCityWeather()">
+              <ion-select-option value="{{city.id}}" *ngFor="let city of cityData">
+                <span>
+                  {{city.name}}
+                </span>
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" class="ion-text-center">
+          <div *ngIf="currentWeather; else noWeather">
+            <div class="select-city">
+              <h4>
+                Current weather
+              </h4>
+              <br>
+              <span class="icon sunnny" *ngIf="currentWeather.current?.temperature >= 20">
+                <ion-icon name="sunny"></ion-icon>
+              </span>
+              <span class="icon cloudy" *ngIf="currentWeather.current?.temperature < 20">
+                <ion-icon name="cloudy"></ion-icon>
+              </span>
+              <br>
+              <h4>
+                {{currentWeather.current?.weather_descriptions[0]}}
+              </h4>
+              <p>
+                Temperature: {{currentWeather.current?.temperature}}
+              </p>
+            </div>
+            <div class="select-city">
+              <div *ngIf="notSubmitted; else submitted">
+                <h4>
+                  Liking today's weather?
+                </h4>
+                <br>
+                <ion-button (click)="likeSubmission('yes')" color="primary" fill="solid" shape="round">
+                  Yes
+                </ion-button>
+                <ion-button (click)="likeSubmission('no')" color="secondary" fill="solid" shape="round">
+                  No
+                </ion-button>
+              </div>
+              <ng-template #submitted>
+                <h4>Thank you for your submission</h4>
+              </ng-template>
+              <br>
+            </div>
+          </div>
+          <!--None selected-->
+          <ng-template #noWeather>
+            <div class="select-city">
+              <h4 color="success" class="ion-no-margin">
+                Please select a city from the dropdown.
+              </h4>
+            </div>
+          </ng-template>
+          <br>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+</ion-content>

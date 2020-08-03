@@ -1,0 +1,43 @@
+.weather-body{
+    background:#022954 !important;
+    min-height: 100vh;
+}
+
+h2{
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 42px;
+    text-align: center;
+}
+
+h4{
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 42px;
+    text-align: center;
+}
+
+.select-city{
+    background-color: #fff;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 51px 30px;
+    border-radius: 13px;
+    margin-top: 60px;
+
+    h4{
+        margin: 0;
+        color: #000;
+    }
+
+    .icon{
+        display: block;
+        font-size: 53px;
+    }
+    .sunnny{
+        color: #fed426;
+    }
+    .cloudy{
+        color: rgb(220, 220, 220);
+    }
+}
