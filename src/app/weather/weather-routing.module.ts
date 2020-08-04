@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: WeatherPage
+  },
+  {
+    path: 'update-weather-modal',
+    loadChildren: () => import('./update-weather-modal/update-weather-modal.module').then( m => m.UpdateWeatherModalPageModule)
   }
 ];
 

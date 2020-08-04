@@ -3,7 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
-
+import { Platform } from '@ionic/angular';
+import { ToastService } from '../service/toast/toast.service'
+import { ModalController } from '@ionic/angular'
+import { UpdateWeatherModalPage } from "./update-weather-modal/update-weather-modal.page";
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.page.html',
@@ -13,22 +16,47 @@ export class WeatherPage implements OnInit {
 
   like: any;
   notSubmitted: boolean = true;
-  cityID: any;
-  currentWeather: any ={};
-
+  cityID: any = 4;
+  currentWeather: any;
+  checkCurrentWeather: any;
   constructor(
     private http: HttpClient,
     public loadingController: LoadingController,
     private fireStore: AngularFirestore,
-    private fireAnalytics: AngularFireAnalytics
+    private fireAnalytics: AngularFireAnalytics,
+    public platform: Platform,
+    private toastService:ToastService,
+    private modalController: ModalController
   ) {
-
+    this.platform.resume.subscribe(async () => {
+      this.checkWeatherOnReturn();
+    });
   }
 
   ngOnInit() {
-    // this.getWeather();
+    this.getCityWeather();
   }
 
+  async openUpdateWeatherModal(newWeatherData: any){
+    const modal = await this.modalController.create({
+      component: UpdateWeatherModalPage,
+      cssClass: 'weather-modal',
+      componentProps: {
+        weatherDetails: newWeatherData,
+      }
+    });
+
+    modal.onDidDismiss()
+      .then((update) => {
+        const status = update;
+        if(status.data == true){
+          // this.checkWeatherOnReturn();
+          this.currentWeather = this.checkCurrentWeather;
+        }
+    });
+
+    return await modal.present();
+  }
 
   cityData = [
     {
@@ -70,35 +98,40 @@ export class WeatherPage implements OnInit {
   mapboxURL = 'https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?limit=1&access_token=pk.eyJ1Ijoic2hhc2hpMDciLCJhIjoiY2thNXJiMGIyMDJzbDNmazNnemQwbWhkbyJ9.N8N9sQBTZBgOr_EX0-NWDQ';
 
   getCityWeather() {
+    localStorage.setItem('cityID', this.cityID);
     let cityLat = this.cityData[this.cityID].lat;
-    let cityLon = this.cityData[this.cityID].lon;
-    console.log(cityLat, cityLon);
-    this.presentLoading()
+    let cityLon = this.cityData[this.cityID].lon;    
     let weatherAPI = 'http://api.weatherstack.com/current?access_key=902d5b3808f367bb354460bb7a3ed2fd&query=' + cityLat + ',' + cityLon;
 
     this.http.get(weatherAPI).subscribe(res => {
       this.currentWeather = res;
-      this.loadingController.dismiss();
     }, err => {
       console.log(err);
-      this.loadingController.dismiss();
     });
   }
 
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'Please wait...',
+  checkWeatherOnReturn(){
+    let cityID = localStorage.getItem('cityID');
+    let cityLat = this.cityData[cityID].lat;
+    let cityLon = this.cityData[cityID].lon;  
+    let weatherAPI = 'http://api.weatherstack.com/current?access_key=902d5b3808f367bb354460bb7a3ed2fd&query=' + cityLat + ',' + cityLon;
+    this.http.get(weatherAPI).subscribe(res => {
+      this.checkCurrentWeather = res;
+      if(this.checkCurrentWeather.current.temperature === this.currentWeather.current.temperature){
+          this.toastService.displayToast('Weather upto date');
+      }else{
+        this.openUpdateWeatherModal(this.checkCurrentWeather);
+      }
+      
+    }, err => {
+      console.log(err);
     });
-    await loading.present();
-
-    const { role, data } = await loading.onDidDismiss();
-    console.log('Loading dismissed!');
   }
+
 
 
   likeSubmission(status: string) {
-    this.fireAnalytics.logEvent('feedback-weather', { name: status, })
+    this.fireAnalytics.logEvent('feedback', { name: status })
       .then(() => console.log('Event successfully tracked'))
       .catch(err => console.log('Error tracking event:', err));
   }

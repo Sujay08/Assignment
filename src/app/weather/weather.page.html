@@ -7,7 +7,7 @@
           <br>
           <br>
           <h2>Find Weather</h2>
-          <ion-item>
+          <ion-item class="select-field">
             <ion-label>Select City</ion-label>
             <ion-select [(ngModel)]="cityID" (ionChange)="getCityWeather()">
               <ion-select-option value="{{city.id}}" *ngFor="let city of cityData">

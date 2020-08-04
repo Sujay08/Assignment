@@ -8,8 +8,12 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ToastService } from "./service/toast/toast.service";
 
+//modals
+import { UpdateWeatherModalPageModule } from "./weather/update-weather-modal/update-weather-modal.module";
+//services
+import { ToastService } from "./service/toast/toast.service";
+//plugins
 import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -20,6 +24,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 // import { AngularFirestore } from '@angular/fire/firestore';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -30,8 +35,11 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     //firebase
     AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAnalyticsModule,
     AngularFireAuthModule,
     // AngularFirestore
+    //Modals
+    UpdateWeatherModalPageModule
   ],
   providers: [
     StatusBar,
