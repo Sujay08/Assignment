@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
+import * as firebase from 'firebase/app'
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -17,6 +17,10 @@ export class AppComponent {
   ) {
     this.initializeApp();
   }
+
+  ngOnInit() {
+    firebase.analytics()
+   }
 
   initializeApp() {
     this.platform.ready().then(() => {

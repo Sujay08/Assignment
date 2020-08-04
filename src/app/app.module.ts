@@ -14,8 +14,8 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { DomSanitizer } from '@angular/platform-browser';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
-import firebaseConfig from "./firebase"
 import { AngularFireModule } from '@angular/fire';
+import firebaseConfig from "./firebase"
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 // import { AngularFirestore } from '@angular/fire/firestore';

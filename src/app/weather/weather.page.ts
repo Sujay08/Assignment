@@ -2,32 +2,34 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
 
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.page.html',
   styleUrls: ['./weather.page.scss'],
 })
-export class WeatherPage implements OnInit{
+export class WeatherPage implements OnInit {
 
-  like: any ;
+  like: any;
   notSubmitted: boolean = true;
   cityID: any;
-  currentWeather: any; 
+  currentWeather: any ={};
 
   constructor(
     private http: HttpClient,
     public loadingController: LoadingController,
     private fireStore: AngularFirestore,
-  ) { 
-    
+    private fireAnalytics: AngularFireAnalytics
+  ) {
+
   }
 
   ngOnInit() {
     // this.getWeather();
   }
 
-  
+
   cityData = [
     {
       id: '0',
@@ -96,10 +98,10 @@ export class WeatherPage implements OnInit{
 
 
   likeSubmission(status: string) {
-    // this.like.status = status;
-    // this.fireStore.collection('Likes').add(this.like);
-    let eventParams = {}
-
+    this.fireAnalytics.logEvent('feedback-weather', { name: status, })
+      .then(() => console.log('Event successfully tracked'))
+      .catch(err => console.log('Error tracking event:', err));
   }
-
 }
+
+
