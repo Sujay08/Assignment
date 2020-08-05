@@ -21,6 +21,7 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { AngularFireModule } from '@angular/fire';
 import firebaseConfig from "./firebase"
 import { AngularFireAuthModule } from '@angular/fire/auth';
+// import { FirebaseAnalytics } from '@ionic-native/firebase-analytics/ngx';
 
 // import { AngularFirestore } from '@angular/fire/firestore';
 import { HttpClientModule } from '@angular/common/http';
@@ -48,6 +49,8 @@ import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
     File,
     WebView,
     ToastService,
+    // FirebaseAnalytics,
+
     // firebaseConfig,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

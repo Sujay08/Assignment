@@ -7,6 +7,7 @@ import { Platform } from '@ionic/angular';
 import { ToastService } from '../service/toast/toast.service'
 import { ModalController } from '@ionic/angular'
 import { UpdateWeatherModalPage } from "./update-weather-modal/update-weather-modal.page";
+// import { FirebaseAnalytics } from '@ionic-native/firebase-analytics/ngx';
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.page.html',
@@ -25,8 +26,9 @@ export class WeatherPage implements OnInit {
     private fireStore: AngularFirestore,
     private fireAnalytics: AngularFireAnalytics,
     public platform: Platform,
-    private toastService:ToastService,
-    private modalController: ModalController
+    private toastService: ToastService,
+    private modalController: ModalController,
+    // private firebaseAnalytics: FirebaseAnalytics
   ) {
     this.platform.resume.subscribe(async () => {
       this.checkWeatherOnReturn();
@@ -37,7 +39,7 @@ export class WeatherPage implements OnInit {
     this.getCityWeather();
   }
 
-  async openUpdateWeatherModal(newWeatherData: any){
+  async openUpdateWeatherModal(newWeatherData: any) {
     const modal = await this.modalController.create({
       component: UpdateWeatherModalPage,
       cssClass: 'weather-modal',
@@ -49,11 +51,11 @@ export class WeatherPage implements OnInit {
     modal.onDidDismiss()
       .then((update) => {
         const status = update;
-        if(status.data == true){
+        if (status.data == true) {
           // this.checkWeatherOnReturn();
           this.currentWeather = this.checkCurrentWeather;
         }
-    });
+      });
 
     return await modal.present();
   }
@@ -100,29 +102,30 @@ export class WeatherPage implements OnInit {
   getCityWeather() {
     localStorage.setItem('cityID', this.cityID);
     let cityLat = this.cityData[this.cityID].lat;
-    let cityLon = this.cityData[this.cityID].lon;    
+    let cityLon = this.cityData[this.cityID].lon;
     let weatherAPI = 'http://api.weatherstack.com/current?access_key=902d5b3808f367bb354460bb7a3ed2fd&query=' + cityLat + ',' + cityLon;
 
     this.http.get(weatherAPI).subscribe(res => {
       this.currentWeather = res;
+      localStorage.setItem('temprature', this.currentWeather.current?.temperature)
     }, err => {
       console.log(err);
     });
   }
 
-  checkWeatherOnReturn(){
+  checkWeatherOnReturn() {
     let cityID = localStorage.getItem('cityID');
     let cityLat = this.cityData[cityID].lat;
-    let cityLon = this.cityData[cityID].lon;  
+    let cityLon = this.cityData[cityID].lon;
     let weatherAPI = 'http://api.weatherstack.com/current?access_key=902d5b3808f367bb354460bb7a3ed2fd&query=' + cityLat + ',' + cityLon;
     this.http.get(weatherAPI).subscribe(res => {
       this.checkCurrentWeather = res;
-      if(this.checkCurrentWeather.current.temperature === this.currentWeather.current.temperature){
-          this.toastService.displayToast('Weather upto date');
-      }else{
+      let compareTemprature = parseInt(localStorage.getItem('temprature'))
+      if (compareTemprature === this.currentWeather.current.temperature) {
+        this.toastService.displayToast('Weather upto date');
+      } else {
         this.openUpdateWeatherModal(this.checkCurrentWeather);
       }
-      
     }, err => {
       console.log(err);
     });
@@ -131,9 +134,12 @@ export class WeatherPage implements OnInit {
 
 
   likeSubmission(status: string) {
-    this.fireAnalytics.logEvent('feedback', { name: status })
-      .then(() => console.log('Event successfully tracked'))
-      .catch(err => console.log('Error tracking event:', err));
+    // this.firebaseAnalytics.logEvent('my_event', { param1: "value1" })
+    //   .then((res: any) => console.log(res))
+    //   .catch((error: any) => console.error(error));
+    // this.fireAnalytics.logEvent('feedback', { name: status })
+    //   .then(() => console.log('Event successfully tracked'))
+    //   .catch(err => console.log('Error tracking event:', err));
   }
 }
 
