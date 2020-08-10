@@ -1,0 +1,20 @@
+img{
+    width: 100%;
+}
+
+.container-height{
+    height: 100vh;
+    width: 100%;
+    display: table;
+    .container-content{
+        background-color: #4995BE;
+        display: table-cell;
+        vertical-align: middle;
+        ion-grid{
+            padding: 40px 15px;
+            border-radius: 15px;
+            background-color: #fff;
+            max-width: 356px;
+        }
+    }
+}

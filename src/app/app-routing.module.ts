@@ -26,7 +26,15 @@ const routes: Routes = [
   {
     path: 'weather',
     loadChildren: () => import('./weather/weather.module').then( m => m.WeatherPageModule)
+  },  {
+    path: 'gallery',
+    loadChildren: () => import('./gallery/gallery.module').then( m => m.GalleryPageModule)
   },
+  {
+    path: 'gallery-home',
+    loadChildren: () => import('./gallery-home/gallery-home.module').then( m => m.GalleryHomePageModule)
+  },
+
 ];
 
 @NgModule({
