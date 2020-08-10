@@ -36,8 +36,9 @@
                 {{currentWeather.current?.weather_descriptions[0]}}
               </h4>
               <p>
-                Temperature: {{currentWeather.current?.temperature}}
+                Temperature: {{currentWeather.current?.temperature}}deg
               </p>
+              <!-- <small>Data on app initialization is hard coded for testing perose</small> -->
             </div>
             <div class="select-city">
               <div *ngIf="notSubmitted; else submitted">

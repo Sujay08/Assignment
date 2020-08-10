@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireAnalytics } from '@angular/fire/analytics';
+// import { AngularFireAnalytics } from '@angular/fire/analytics';
 import { Platform } from '@ionic/angular';
 import { ToastService } from '../service/toast/toast.service'
 import { ModalController } from '@ionic/angular'
 import { UpdateWeatherModalPage } from "./update-weather-modal/update-weather-modal.page";
-// import { FirebaseAnalytics } from '@ionic-native/firebase-analytics/ngx';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics/ngx';
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.page.html',
@@ -24,11 +24,11 @@ export class WeatherPage implements OnInit {
     private http: HttpClient,
     public loadingController: LoadingController,
     private fireStore: AngularFirestore,
-    private fireAnalytics: AngularFireAnalytics,
+    // private fireAnalytics: AngularFireAnalytics,
     public platform: Platform,
     private toastService: ToastService,
     private modalController: ModalController,
-    // private firebaseAnalytics: FirebaseAnalytics
+    private firebaseAnalytics: FirebaseAnalytics
   ) {
     this.platform.resume.subscribe(async () => {
       this.checkWeatherOnReturn();
@@ -54,6 +54,7 @@ export class WeatherPage implements OnInit {
         if (status.data == true) {
           // this.checkWeatherOnReturn();
           this.currentWeather = this.checkCurrentWeather;
+          localStorage.setItem('temprature', this.currentWeather.current?.temperature);
         }
       });
 
@@ -107,6 +108,7 @@ export class WeatherPage implements OnInit {
 
     this.http.get(weatherAPI).subscribe(res => {
       this.currentWeather = res;
+      this.currentWeather.current.temperature = 5;
       localStorage.setItem('temprature', this.currentWeather.current?.temperature)
     }, err => {
       console.log(err);
@@ -121,7 +123,9 @@ export class WeatherPage implements OnInit {
     this.http.get(weatherAPI).subscribe(res => {
       this.checkCurrentWeather = res;
       let compareTemprature = parseInt(localStorage.getItem('temprature'))
-      if (compareTemprature === this.currentWeather.current.temperature) {
+      if (compareTemprature === this.checkCurrentWeather.current.temperature) {
+        console.log(typeof compareTemprature, typeof this.currentWeather.current.temperature);
+        console.log(compareTemprature, this.currentWeather.current.temperature);
         this.toastService.displayToast('Weather upto date');
       } else {
         this.openUpdateWeatherModal(this.checkCurrentWeather);
@@ -134,9 +138,12 @@ export class WeatherPage implements OnInit {
 
 
   likeSubmission(status: string) {
-    // this.firebaseAnalytics.logEvent('my_event', { param1: "value1" })
-    //   .then((res: any) => console.log(res))
-    //   .catch((error: any) => console.error(error));
+    this.firebaseAnalytics.logEvent('my_event', { status: status })
+      .then((res: any) => {
+        this.notSubmitted = false;
+        console.log(res)
+      })
+      .catch((error: any) => console.error(error));
     // this.fireAnalytics.logEvent('feedback', { name: status })
     //   .then(() => console.log('Event successfully tracked'))
     //   .catch(err => console.log('Error tracking event:', err));
