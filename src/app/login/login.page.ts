@@ -27,7 +27,7 @@ export class LoginPage implements OnInit {
   checkAuth(){
     let status = localStorage.getItem('signedIn')
     if(status == 'true'){
-      this.router.navigate(['/weather'])
+      this.router.navigate(['/gallery-home'])
     }
   }
 
@@ -37,7 +37,7 @@ export class LoginPage implements OnInit {
       localStorage.setItem('signedIn', 'true');
       this.formData.username = '';
       this.formData.password = '';
-      this.router.navigate(['/weather']);
+      this.router.navigate(['/gallery-home']);
     } catch (error) {
       this.toastService.displayToast(error.message);    
     }
