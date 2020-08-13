@@ -1,0 +1,13 @@
+.img-card{
+    background-color: #fff;
+    box-shadow: 0px 3px 13px 0px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    .card-content{
+        padding: 18px;
+        text-align: center;
+        small{
+            display: block;
+        }
+    }
+}
