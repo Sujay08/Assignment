@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>gallery</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  \n  <ion-grid fixed>\n    <ion-row>\n      <ion-col size=\"4\" class=\"ion-text-center\" *ngFor=\"let img of data\">\n        <img [src]=\"img.imageData\" />\n        <small>{{img.date | date: 'd MMM yy'}}</small>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>\n";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>gallery</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  \n  <ion-grid fixed>\n    <ion-row>\n      <ion-col size=\"12\">\n        \n      </ion-col>\n      <ion-col size=\"12\" class=\"ion-text-center\" *ngFor=\"let img of data\">\n        \n        <small></small>\n\n        <div class=\"img-card\">\n          <img [src]=\"img.imageData\" />\n          <div class=\"card-content\">\n            <small style=\"margin-bottom: 6px;\"><b>{{img.imageName}}</b></small>\n            <small>{{img.date | date: 'd MMM yy'}}</small>\n          </div>\n        </div>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>\n";
     /***/
   },
 
@@ -174,7 +174,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2dhbGxlcnkvZ2FsbGVyeS5wYWdlLnNjc3MifQ== */";
+    __webpack_exports__["default"] = ".img-card {\n  background-color: #fff;\n  box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.2);\n  border-radius: 10px;\n  overflow: hidden;\n}\n.img-card .card-content {\n  padding: 18px;\n  text-align: center;\n}\n.img-card .card-content small {\n  display: block;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZ2FsbGVyeS9EOlxcc3VqYXlQcm9qZWN0c1xcQXNzaWdubWVudC9zcmNcXGFwcFxcZ2FsbGVyeVxcZ2FsbGVyeS5wYWdlLnNjc3MiLCJzcmMvYXBwL2dhbGxlcnkvZ2FsbGVyeS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxzQkFBQTtFQUNBLCtDQUFBO0VBQ0EsbUJBQUE7RUFDQSxnQkFBQTtBQ0NKO0FEQUk7RUFDSSxhQUFBO0VBQ0Esa0JBQUE7QUNFUjtBRERRO0VBQ0ksY0FBQTtBQ0daIiwiZmlsZSI6InNyYy9hcHAvZ2FsbGVyeS9nYWxsZXJ5LnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5pbWctY2FyZHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICNmZmY7XHJcbiAgICBib3gtc2hhZG93OiAwcHggM3B4IDEzcHggMHB4IHJnYmEoMCwwLDAsMC4yKTtcclxuICAgIGJvcmRlci1yYWRpdXM6IDEwcHg7XHJcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xyXG4gICAgLmNhcmQtY29udGVudHtcclxuICAgICAgICBwYWRkaW5nOiAxOHB4O1xyXG4gICAgICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICAgICAgICBzbWFsbHtcclxuICAgICAgICAgICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICAgICAgfVxyXG4gICAgfVxyXG59IiwiLmltZy1jYXJkIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZjtcbiAgYm94LXNoYWRvdzogMHB4IDNweCAxM3B4IDBweCByZ2JhKDAsIDAsIDAsIDAuMik7XG4gIGJvcmRlci1yYWRpdXM6IDEwcHg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG59XG4uaW1nLWNhcmQgLmNhcmQtY29udGVudCB7XG4gIHBhZGRpbmc6IDE4cHg7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cbi5pbWctY2FyZCAuY2FyZC1jb250ZW50IHNtYWxsIHtcbiAgZGlzcGxheTogYmxvY2s7XG59Il19 */";
     /***/
   },
 

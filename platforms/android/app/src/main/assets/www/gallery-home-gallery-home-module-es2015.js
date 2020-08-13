@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n\n<ion-content>\n  <div class=\"container-height\">\n    <div class=\"container-content\">\n      <ion-grid fixed>\n        <ion-row>\n          <ion-col size=\"6\">\n            <ion-button (click)=\"takePictiure()\" expand=\"block\" fill=\"solid\" shape=\"round\">\n              Take picture\n            </ion-button>\n          </ion-col>\n          <ion-col size=\"6\">\n            <ion-button (click)=\"ViewGallery()\" expand=\"block\" fill=\"solid\" shape=\"round\">\n             View Gallery\n            </ion-button>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n    </div>\n  </div>\n\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\n  <div class=\"container-height\">\n    <div class=\"container-content\">\n      <ion-grid fixed>\n        <ion-row>\n          <ion-col size=\"6\">\n            <ion-button (click)=\"takePictiure()\" expand=\"block\" fill=\"solid\" shape=\"round\">\n              Take picture\n            </ion-button>\n          </ion-col>\n          <ion-col size=\"6\">\n            <ion-button (click)=\"ViewGallery()\" expand=\"block\" fill=\"solid\" shape=\"round\">\n             View Gallery\n            </ion-button>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n    </div>\n  </div>\n</ion-content>\n");
 
 /***/ }),
 
